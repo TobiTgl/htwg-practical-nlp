@@ -41,6 +41,8 @@ class LogisticRegression:
             learning_rate (float, optional): the learning rate of the model. Defaults to 1e-9.
             n_iter (int, optional): the number of iterations for the training. Defaults to 1500.
         """
+        self.theta = None
+        self.cost = None
         self.learning_rate = learning_rate
         self.n_iter = n_iter
 
