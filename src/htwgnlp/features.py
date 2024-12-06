@@ -18,6 +18,8 @@ class CountVectorizer:
         word_frequencies (defaultdict[tuple[str, int], int]): a dictionary of word frequencies by class
     """
 
+    word_frequencies: defaultdict[tuple[str, int], int]
+
     def __init__(self):
         """Initializes the CountVectorizer.
 
@@ -27,8 +29,7 @@ class CountVectorizer:
         This means that if a key is not found in the dictionary, the value is 0 and no KeyError exception is raised.
 
         """
-        # TODO ASSIGNMENT-2: implement this method
-        raise NotImplementedError("This method needs to be implemented.")
+        self.word_frequencies = defaultdict(int)
 
     def build_word_frequencies(
         self, tweets: list[list[str]], labels: list[str]
@@ -50,8 +51,9 @@ class CountVectorizer:
             labels (list[str]): a list of corresponding class labels
 
         """
-        # TODO ASSIGNMENT-2: implement this method
-        raise NotImplementedError("This method needs to be implemented.")
+        for i in range(len(tweets)):
+            for word in tweets[i]:
+                self.word_frequencies[(word, int(labels[i]))] += 1
 
     def get_features(self, tweet: list[str]) -> np.ndarray:
         """Returns a feature vector for a given tweet.
@@ -64,6 +66,11 @@ class CountVectorizer:
         Returns:
             np.ndarray: the feature vector for the tweet as a row vector
         """
-
-        # TODO ASSIGNMENT-2: implement this method
-        raise NotImplementedError("This method needs to be implemented.")
+        pos = 0
+        neg = 0
+        for word in tweet:
+            pos += self.word_frequencies[(word, 1)]
+            neg += self.word_frequencies[(word, 0)]
+        print(tweet)
+        print([1, pos, neg])
+        return np.array([1, pos, neg])
